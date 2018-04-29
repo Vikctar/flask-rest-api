@@ -4,9 +4,9 @@ def who_do_you_know():
     Return that list"""
     who_you_know = input("Tell me the names of people you know, my g, separated by commas:")
     people = who_you_know.split(',')
-    people_without_spaces = []
-    for person in people:
-        people_without_spaces.append(person.strip())
+
+    people_without_spaces = [person.strip() for person in people]
+
     return people_without_spaces
 
 
@@ -19,6 +19,7 @@ def ask_user():
     See if their name is in the list of people they know
     Print out that they know the person"""
     known_person = input("Tell me the name of someone you know:")
+
     if known_person in watu:
         print("you know {} my g".format(known_person))
     else:
