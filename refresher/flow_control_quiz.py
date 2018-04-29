@@ -5,7 +5,8 @@ numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 def even_numbers():
     evens = []
     for number in numbers:
-        evens.append(number)
+        if number % 2 == 0:
+            evens.append(number)
     return evens
 
 
@@ -13,3 +14,5 @@ def even_numbers():
 def user_menu(choice):
     if choice == 'a':
         return "Add"
+    elif choice == 'q':
+        return 'Quit'
