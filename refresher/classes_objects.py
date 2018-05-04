@@ -1,4 +1,5 @@
 class LotteryPlayer:
+    # self: This is the object that we are creating
     def __init__(self):
         self.name = 'Kalf'
         self.numbers = (5, 9, 12, 3, 1, 21)
@@ -7,12 +8,21 @@ class LotteryPlayer:
         return sum(self.numbers)
 
 
-player = LotteryPlayer()
-print(player.name)
-print(player.total())
+class Student:
+    def __init__(self, name, school):
+        self.name = name
+        self.school = school
+        self.marks = []
 
-player_one = LotteryPlayer()
-player_two = LotteryPlayer()
+    def average_marks(self):
+        return sum(self.marks) / len(self.marks)
 
-print(player_one == player_two)
-print(player_one.name == player_two.name)
+
+anna = Student('Anna', 'MIT')
+anna.marks.append(56)
+anna.marks.append(88)
+anna.marks.append(99)
+anna.marks.append(96)
+
+print(anna.marks)
+print(anna.average_marks())
