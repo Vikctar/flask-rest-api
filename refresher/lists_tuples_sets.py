@@ -1,44 +1,56 @@
-# List: Mutable and ordered
-grades = [77, 88, 95, 99, 100]
+# Grades list
+grades = [77, 88, 98, 95, 100]
 
-# Tuple: Immutable
-tuple_grades = (55, 66, 77, 88, 99, 100)
+# Grades tuple
+tuple_grades = (77, 88, 98, 95, 100)
 
-# Set: unique and unordered
-set_grades = {77, 88, 99, 100, 55}
+# Grades set
+set_grades = {77, 88, 98, 95, 100}
 
-# Print out the length (number of elements in the list)
-print("Length:", len(grades))
+# Length of the list
+print(len(grades))
 
-# Sum of all the elements in the list
-print("Sum:", sum(grades))
+# Sum of its elements
+print(sum(grades))
 
-print(tuple_grades)
+print(type(grades))
+
 print(set_grades)
 
-# add an element to the list
-grades.append(60)
+# Add an element to a list
+grades.append(66)
+
 print(grades)
 
-# Adding an element to a tuple
-tuple_grades = tuple_grades + (120,)
+tuple_grades += (200,)
 print(tuple_grades)
 
-# set operation
-set_grades.add(70)
+set_grades.add(60)
 print(set_grades)
 
-# remove (pop) last item
-set_grades.pop()
-print(set_grades)
-
-# Advanced set ops
-lottery_numbers = {1, 2, 3, 4, 5, 6}
+# Set operations
+your_lottery_numbers = {1, 2, 3, 4, 5}
 winning_numbers = {1, 3, 5, 7, 9, 11}
 
-print(lottery_numbers.union(winning_numbers))
-print(lottery_numbers.intersection(winning_numbers))
-print(lottery_numbers.difference(winning_numbers))
-print(lottery_numbers.isdisjoint(winning_numbers))
+# Numbers that are in both sets
+print(your_lottery_numbers.intersection(winning_numbers))
 
+# All the numbers in the two sets
+print(your_lottery_numbers.union(winning_numbers))
 
+# Unique elements in the two sets (only appears in one of the sets)
+# Opposite of intersection
+print(your_lottery_numbers.difference(winning_numbers))
+
+# quiz
+# Create a list called my_list, with three numbers. The total of the numbers added together should be 100
+my_list = [10, 20, 70]
+
+# Create a tuple, called my_tuple with a single value in it
+my_tuple = (7,)
+
+# Modify set2 so that set1.intersection(set2) returns {5, 77, 9, 12}
+set1 = {14, 5, 9, 31, 12, 77, 67, 8}
+set2 = {5, 9, 12, 77}
+
+print(set1.intersection(set2))
