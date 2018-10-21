@@ -8,8 +8,8 @@ class Student:
         return sum(self.marks) / len(self.marks)
 
     @classmethod
-    def friend(cls, origin, friend_name, salary):
-        return cls(friend_name, origin.school, salary)
+    def friend(cls, origin, friend_name, *args):
+        return cls(friend_name, origin.school, *args)
 
 
 class WorkingStudent(Student):
