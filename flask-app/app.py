@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -31,7 +31,6 @@ stores = [
     }
 ]
 
-
 # @app.route('/')
 # def home():
 #     return 'Welcome Home'
@@ -54,25 +53,53 @@ def get_stores():
 # GET /store/<string:mame>
 @app.route('/store/<string:name>')
 def get_store(name):
-    pass
+    for store in stores:
+        if store['name'].lower() == name.lower():
+            return jsonify(store)
+    return jsonify({'message': 'store not found'})
 
 
 # GET /store/<string:name>/item
 @app.route('/store/<string:name>/item')
-def get_items_in_store():
-    pass
+def get_items_in_store(name):
+    """
+    Iterate over stores list
+    If name matches store name return the items in that store
+    :param name: store name
+    :return: items json
+    """
+    for store in stores:
+        if store['name'].lower() == name.lower():
+            return jsonify({'items': store['items']})
+    return jsonify({'error': True, 'message': 'Store not found'})
 
 
 # POST /store data: {name}
 @app.route('/store', methods=['POST'])
 def create_store():
-    pass
+    request_data = request.get_json()
+    new_store = {
+        'name': request_data['name'],
+        'items': []
+    }
+
+    stores.append(new_store)
+    return jsonify(new_store)
 
 
 # POST /store/<string:name>/item {name: price:}
 @app.route('/store/<string:name>/item', methods=['POST'])
 def create_item_in_store(name):
-    pass
+    request_data = request.get_json()
+    for store in stores:
+        if store['name'].lower() == name.lower():
+            new_item = {
+                'name': request_data['name'],
+                'price': request_data['price']
+            }
+            store['items'].append(new_item)
+            return jsonify(new_item)
+    return jsonify({'error': True, 'message': 'store not found'})
 
 
 app.run(port=5000, debug=True)
