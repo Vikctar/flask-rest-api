@@ -57,7 +57,7 @@ def get_store(name):
     for store in stores:
         if store['name'].lower() == name.lower():
             return jsonify(store)
-    return jsonify({'message': 'store not found'})
+    return jsonify({'error': True, 'message': 'store not found'})
 
 
 # GET /store/<string:name>/item
