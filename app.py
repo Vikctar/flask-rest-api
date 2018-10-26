@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
@@ -31,9 +31,10 @@ stores = [
     }
 ]
 
-# @app.route('/')
-# def home():
-#     return 'Welcome Home'
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 
 """ HTTP VERBS
@@ -44,7 +45,7 @@ POST - Used to send data to the server
 
 
 # GET /store
-@app.route('/')
+# @app.route('/')
 @app.route('/store')
 def get_stores():
     return jsonify({'stores': stores})
