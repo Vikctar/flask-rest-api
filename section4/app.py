@@ -17,11 +17,13 @@ class Item(Resource):
         for item in items:
             if item['name'].lower() == name.lower():
                 return item
+        return {'error': 'No item named {} found'.format(name)}, 404
+
 
     def post(self, name):
         item = {'name': name, 'price': 12.00}
         items.append(item)
-        return item
+        return item, 201
 
 
 api.add_resource(Student, '/student/<string:name>')
