@@ -19,14 +19,19 @@ class Item(Resource):
                 return item
         return {'error': 'No item named {} found'.format(name)}, 404
 
-
     def post(self, name):
         item = {'name': name, 'price': 12.00}
         items.append(item)
         return item, 201
 
 
+class Items(Resource):
+    def get(self):
+        return {'items': items}
+
+
 api.add_resource(Student, '/student/<string:name>')
 api.add_resource(Item, '/item/<string:name>')
+api.add_resource(Items, '/items')
 
 app.run(port=5000, debug=True)
