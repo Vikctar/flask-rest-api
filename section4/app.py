@@ -1,10 +1,14 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
+from flask_jwt import JWT, jwt_required
+from section4.security import authenticate, identity
 
 app = Flask(__name__)  # type: Flask
+app.secret_key = 'k1ll3r'
 # noinspection PyTypeChecker
 api = Api(app)
 
+jwt = JWT(app, authenticate, identity)
 items = []
 
 
@@ -14,6 +18,7 @@ class Student(Resource):
 
 
 class Item(Resource):
+    @jwt_required()
     def get(self, name):
         item = next(filter(lambda x: x['name'] == name, items), None)
         if item:
@@ -21,6 +26,7 @@ class Item(Resource):
         else:
             return {'error': True, 'message': 'No item named {} found'.format(name)}, 404
 
+    @jwt_required()
     def post(self, name):
         if next(filter(lambda x: x['name'] == name, items), None):
             return {'error': True, 'message': 'An item with name {} already exists.'.format(name)}, 400
@@ -31,6 +37,7 @@ class Item(Resource):
 
 
 class Items(Resource):
+    @jwt_required()
     def get(self):
         if len(items) == 0:
             return {'error': True, 'message': 'No items found'}
