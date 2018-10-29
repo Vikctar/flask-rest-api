@@ -14,12 +14,15 @@ class Student(Resource):
 
 class Item(Resource):
     def get(self, name):
-        for item in items:
-            if item['name'].lower() == name.lower():
-                return item
-        return {'error': 'No item named {} found'.format(name)}, 404
+        item = next(filter(lambda x: x['name'] == name, items), None)
+        if item:
+            return {'item': item}, 200
+        else:
+            return {'error': True, 'message': 'No item named {} found'.format(name)}, 404
 
     def post(self, name):
+        if next(filter(lambda x: x['name'] == name, items), None):
+            return {'error': True, 'message': 'An item with name {} already exists.'.format(name)}, 400
         data = request.get_json()
         item = {'name': name, 'price': data['price']}
         items.append(item)
@@ -28,6 +31,8 @@ class Item(Resource):
 
 class Items(Resource):
     def get(self):
+        if len(items) == 0:
+            return {'error': True, 'message': 'No items found'}
         return {'items': items}
 
 
