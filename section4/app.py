@@ -1,7 +1,8 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 
-app = Flask(__name__)
+app = Flask(__name__)  # type: Flask
+# noinspection PyTypeChecker
 api = Api(app)
 
 items = []
@@ -36,8 +37,11 @@ class Items(Resource):
         return {'items': items}
 
 
+# noinspection PyTypeChecker
 api.add_resource(Student, '/student/<string:name>')
+# noinspection PyTypeChecker
 api.add_resource(Item, '/item/<string:name>')
+# noinspection PyTypeChecker
 api.add_resource(Items, '/items')
 
 app.run(port=5000, debug=True)
